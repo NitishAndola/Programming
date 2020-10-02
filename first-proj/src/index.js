@@ -4,6 +4,12 @@ import ReactDOM from "react-dom";
 
 function buttonText() {
   var i = 0;
+  var styleobj= {
+ button: {
+	color: "white"
+}
+};
+
   var msg= "Click me " + i + " times";
    setTimeout(function () {
     i++;
