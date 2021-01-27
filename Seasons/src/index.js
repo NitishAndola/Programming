@@ -1,21 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SeasonsDisplay from "./SeasonsDisplay";
-
-// const App = () => {
-//   window.navigator.geolocation.getCurrentPosition(
-//     (result) => console.log(result),
-//     (err) => console.error(err)
-//   );
-
-//   return (
-//     <div>
-//       <div>Hello World</div>
-//       <SeasonsDisplay />
-//     </div>
-//   );
-// };
-var i = 0;
+import Spinner from "./Spinner";
+import "semantic-ui-css/semantic.min.css";
 
 class App extends React.Component {
   state = { lat: null, error: null };
@@ -27,11 +14,15 @@ class App extends React.Component {
     );
   }
 
-  render() {
-    console.log("Inside Render", i++);
-    if (this.state.lat) return <SeasonsDisplay latitude={this.state.lat}></SeasonsDisplay>;
+  renderContent() {
+    if (this.state.lat)
+      return <SeasonsDisplay latitude={this.state.lat}></SeasonsDisplay>;
     else if (this.state.error) return <h1>Error: {this.state.error}</h1>;
-    else return <h1>Loading...</h1>;
+    else return <Spinner text="Waiting for Location..." />;
+  }
+
+  render() {
+    return <div className="border red">{this.renderContent()}</div>
   }
 }
 
